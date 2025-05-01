@@ -35,7 +35,7 @@ class AuthTest {
     }
 
     @Test
-    @DisplayName("Должен успешно пройти авторизацию зарегистрированным активным пользователем")
+//    @DisplayName("Должен успешно пройти авторизацию зарегистрированным активным пользователем")
     void shouldSuccessfulLoginIfRegisteredActiveUser() {
         var registeredUser = DataGenerator.Registration.getRegisteredUser("active");
         login(registeredUser.getLogin(), registeredUser.getPassword());

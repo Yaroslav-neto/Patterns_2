@@ -35,7 +35,7 @@ class AuthTest {
     }
 
     @Test
-//    @DisplayName("Должен успешно пройти авторизацию зарегистрированным активным пользователем")
+    @DisplayName("Должен успешно пройти авторизацию зарегистрированным активным пользователем")
     void shouldSuccessfulLoginIfRegisteredActiveUser() {
         var registeredUser = DataGenerator.Registration.getRegisteredUser("active");
         login(registeredUser.getLogin(), registeredUser.getPassword());
@@ -75,4 +75,24 @@ class AuthTest {
         login(registeredUser.getLogin(), wrongPassword);
         verifyErrorMessage("Ошибка! Неверно указан логин или пароль", 10);
     }
+
+    @Test
+    @DisplayName("Получить ошибку при входе с логином, содержащим специальные символы")
+    void shouldGetErrorIfLoginContainsSpecialCharacters() {
+        String specialLogin = "user!@#";
+        String password = DataGenerator.Registration.getRegisteredUser("active").getPassword();
+        login(specialLogin, password);
+        verifyErrorMessage("Ошибка! Неверно указан логин или пароль", 10);
+    }
+
+    @Test
+    @DisplayName("Получить ошибку при входе с паролем, содержащим специальные символы")
+    void shouldGetErrorIfPasswordContainsSpecialCharacters() {
+        String login = DataGenerator.Registration.getRegisteredUser("active").getLogin();
+        String specialPassword = "pass!@#";
+        login(login, specialPassword);
+        verifyErrorMessage("Ошибка! Неверно указан логин или пароль", 10);
+    }
+
+
 }

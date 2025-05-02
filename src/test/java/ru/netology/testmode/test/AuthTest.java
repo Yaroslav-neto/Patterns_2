@@ -79,7 +79,7 @@ class AuthTest {
     @Test
     @DisplayName("Получить ошибку при входе с логином, содержащим специальные символы")
     void shouldGetErrorIfLoginContainsSpecialCharacters() {
-        String specialLogin = "user!@#";
+        String specialLogin = DataGenerator.generateStringWithSpecialChars();
         String password = DataGenerator.Registration.getRegisteredUser("active").getPassword();
         login(specialLogin, password);
         verifyErrorMessage("Ошибка! Неверно указан логин или пароль", 10);
@@ -89,7 +89,7 @@ class AuthTest {
     @DisplayName("Получить ошибку при входе с паролем, содержащим специальные символы")
     void shouldGetErrorIfPasswordContainsSpecialCharacters() {
         String login = DataGenerator.Registration.getRegisteredUser("active").getLogin();
-        String specialPassword = "pass!@#";
+        String specialPassword = DataGenerator.generateStringWithSpecialChars();
         login(login, specialPassword);
         verifyErrorMessage("Ошибка! Неверно указан логин или пароль", 10);
     }

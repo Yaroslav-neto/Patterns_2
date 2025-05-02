@@ -9,6 +9,7 @@ import lombok.Value;
 
 
 import java.util.Locale;
+import java.util.Random;
 
 public class DataGenerator {
 
@@ -45,6 +46,17 @@ public class DataGenerator {
         return FAKER.internet().password();
     }
 
+    public static String generateStringWithSpecialChars() {
+        String specialChars = "!@#$%^&*()_+-=<>?";
+        int length = 8;
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            sb.append(specialChars.charAt(random.nextInt(specialChars.length())));
+        }
+        return sb.toString();
+    }
+
     public static class Registration {
 
         private Registration() {
@@ -59,6 +71,7 @@ public class DataGenerator {
             sendRequest(user);
             return user;
         }
+
     }
 
     @Value
